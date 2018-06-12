@@ -1,12 +1,5 @@
 require 'cairo'
-require 'cpu_functions'
-require 'mem_functions'
-require 'netdown_functions'
-require 'netup_functions'
-
-function rgb_to_r_g_b(color,alpha)
-return ((0xa5adff / 0x10000) % 0x100) / 255., ((0xa5adff / 0x100) % 0x100) / 255., (0xa5adff % 0x100) / 255., 1
-end
+require 'functions'
 
 function conky_main_graph(color, alpha)
 	if conky_window == nil then return end
@@ -21,18 +14,18 @@ function conky_main_graph(color, alpha)
 		center_x = 305
 		center_y = 305
 		
---		cpu_radius = 300
---		cpu_circle_width = 300
---		cpu_table_length = 120
---		cpu_table = {}
+		cpu_radius = 300
+		cpu_circle_width = 300
+		cpu_table_length = 120
+		cpu_table = {}
 		
---		mem_radius = 120
---		mem_circle_width = 80
---		mem_table_length = 80
---		mem_table = {}
+		mem_radius = 120
+		mem_circle_width = 80
+		mem_table_length = 80
+		mem_table = {}
 
                 netup_radius = 60
-                netup_circle_width = -40
+                netup_circle_width = 40
                 netup_table_length = 80
                 netup_table = {}
 
@@ -49,25 +42,12 @@ function conky_main_graph(color, alpha)
 
 		-- to here ---------------------------------------------------------
 		-- base, cpu and clock
---		draw_mem_graph()
---		draw_cpu_graph()
-		draw_netup_graph()
-		draw_netdown_graph()
+		draw_graph ("cpu", cpu_table_length, cpu_radius, cpu_circle_width, cpu_table)
+		draw_graph ("memperc", mem_table_length, mem_radius, mem_circle_width, mem_table)
+		draw_graph ("${upspeedf eth0}", netup_table_length, netup_radius, netup_circle_width, netup_table)
+		draw_graph ("${downspeedf eth0}", netup_table_length, netup_radius, netup_circle_width, netup_table)
 	end
 	cairo_destroy(cr)
 	cairo_surface_destroy(cs)
 	cs, cr = nil
 end -- end main function
-
-function draw_line_in_circle(offset, length, width, degree, r, g, b)
-	cairo_set_line_width(cr, width)
-	point = (math.pi / -180) * degree
-	start_x = 0 + (offset * math.sin(point))
-	start_y = 0 - (offset * math.cos(point))
-	end_x = 0 + ((offset + length) * math.sin(point))
-	end_y = 0 - ((offset + length) * math.cos(point))
-	cairo_move_to(cr, start_x + center_x, start_y + center_y)
-	cairo_line_to(cr, end_x + center_x, end_y + center_y)
-	cairo_set_source_rgb (cr, r, g, b);
-	cairo_stroke(cr)
-end

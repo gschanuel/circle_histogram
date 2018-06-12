@@ -33,7 +33,7 @@ function conky_main_graph()
 	end
 	if updates > 1 then
 		draw_graph ("$cpu", cpu_table_length, cpu_radius, cpu_circle_width, cpu_table,8)
-		draw_graph ("100", mem_table_length, mem_radius, mem_circle_width, mem_table, 4)
+		draw_graph ("$memperc", mem_table_length, mem_radius, mem_circle_width, mem_table, 4)
 --		draw_graph ("${upspeedf eth0}", netup_table_length, netup_radius, netup_circle_width, netup_table)
 --		draw_graph ("${downspeedf eth0}", netup_table_length, netup_radius, netup_circle_width, netup_table)
 	end

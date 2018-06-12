@@ -10,14 +10,14 @@ function conky_main_graph()
 		center_x = 300
 		center_y = 300
 		
-		cpu_radius = 300
-		cpu_circle_width = 300
+		cpu_radius = 200
+		cpu_circle_width = 100
 		cpu_table_length = 120
 		cpu_table = {}
 		
 		mem_radius = 120
-		mem_circle_width = 80
-		mem_table_length = 80
+		mem_circle_width = 55
+		mem_table_length = 100
 		mem_table = {}
 
                 netup_radius = 60
@@ -32,8 +32,8 @@ function conky_main_graph()
 
 	end
 	if updates > 1 then
-		draw_graph ("$cpu", cpu_table_length, cpu_radius, cpu_circle_width, cpu_table)
---		draw_graph ("memperc", mem_table_length, mem_radius, mem_circle_width, mem_table)
+		draw_graph ("$cpu", cpu_table_length, cpu_radius, cpu_circle_width, cpu_table,8)
+		draw_graph ("$memperc", mem_table_length, mem_radius, mem_circle_width, mem_table, 4)
 --		draw_graph ("${upspeedf eth0}", netup_table_length, netup_radius, netup_circle_width, netup_table)
 --		draw_graph ("${downspeedf eth0}", netup_table_length, netup_radius, netup_circle_width, netup_table)
 	end

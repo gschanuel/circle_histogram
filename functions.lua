@@ -1,4 +1,4 @@
-function draw_graph (conky_value, table_length, radius, circle_width, table, line_width)
+function draw_graph (conky_value, table_length, radius, circle_width, table, line_width, start_point)
 	-- calculate table
         for i = 1, table_length do
                 if table[i] == nil then
@@ -18,14 +18,14 @@ function draw_graph (conky_value, table_length, radius, circle_width, table, lin
 	-- end calculate table
 	
         for i = 1, table_length do
-                draw_line_in_circle(radius - (circle_width / 2), (circle_width / 100) * table[i], line_width, (360 / table_length) * (i - 1), circle_width )
+                draw_line_in_circle(radius - (circle_width / 2), (circle_width / 100) * table[i], line_width, (360 / table_length) * (i - 1), circle_width, start_point )
         end
 end
 
-function draw_line_in_circle(offset, length, width, degree, circle_width)
-
+function draw_line_in_circle(offset, length, width, degree, circle_width, start_point)
+	start_point = start_point or 0 
 	cairo_set_line_width(cr, width)
-        point = (math.pi / 180) * degree 
+        point = (math.pi / 180) * degree - start_point
         start_x = 0 + (offset * math.sin(point))
         start_y = 0 - (offset * math.cos(point))
         end_x = 0 + ((offset + length) * math.sin(point))
@@ -47,3 +47,4 @@ function draw_line_in_circle(offset, length, width, degree, circle_width)
 	cairo_pattern_destroy(p);
 
 end
+

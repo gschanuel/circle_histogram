@@ -20,24 +20,26 @@ function conky_main_graph()
 		mem_table_length = 60 
 		mem_table = {}
 
-                netup_radius = 60
-                netup_circle_width = 40
-                netup_table_length = 80
+                netup_radius = 100
+                netup_circle_width = 50
+                netup_table_length = 60
                 netup_table = {}
 
-		netdown_radius = 100
-                netdown_circle_width = 50
-                netdown_table_length = 80
+		netdown_radius = -60
+                netdown_circle_width = 28
+                netdown_table_length = 60
                 netdown_table = {}
 
 	end
 	if updates > 1 then
 		draw_graph ("$cpu", cpu_table_length, cpu_radius, cpu_circle_width, cpu_table,8 )
-		draw_graph ("$memperc", mem_table_length, mem_radius, mem_circle_width, mem_table,4,180)
---		draw_graph ("100", cpu_table_length, cpu_radius, cpu_circle_width, cpu_table,8)
---		draw_graph_in ("100", mem_table_length, mem_radius, mem_circle_width, mem_table, 4)
-		draw_graph ("${upspeedf eth0}", netup_table_length, netup_radius, netup_circle_width, netup_table)
-		draw_graph ("${downspeedf eth0}", netup_table_length, netup_radius, netup_circle_width, netup_table)
+		draw_graph ("$memperc", mem_table_length, mem_radius, mem_circle_width, mem_table,4,160.2)
+
+--		upspeed=tonumber(conky_parse("${upspeedf eth0}")/100)
+--		downspeed=tonumber(conky_parse("${downspeedf eth0}")/100)
+--		draw_graph (upspeed, netup_table_length, netup_radius, netup_circle_width, netup_table,8)
+--		draw_graph (downspeed, netup_table_length, netup_radius, netup_circle_width, netup_table,8)
+
 	end
 	cairo_surface_destroy(cs)
 	cairo_destroy(cr)

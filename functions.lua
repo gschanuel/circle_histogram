@@ -36,7 +36,7 @@ function draw_graph (conky_value, table_length, radius, circle_width, table, lin
 		-- draw circle
 		start_point = start_point or 0
 		cairo_set_line_width(cr, line_width)
-		point = (math.pi / 180) * degree - start_point
+		point = (math.pi / 180) * degree - start_point %2
 		start_x = 0 + (offset * math.sin(point))
 		start_y = 0 - (offset * math.cos(point))
 		end_x = 0 + ((offset + length) * math.sin(point))
